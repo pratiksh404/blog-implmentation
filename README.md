@@ -15,6 +15,7 @@
 -   check the database env variable in .env file
 -   php artisan migrate --seed
 -   php artisan key:generate
+-   php artisan storage:link
 -   php artisan serve
 
 ## Admin Credential
