@@ -71,7 +71,18 @@
             <div class="card-body shadow-lg">
                 <div class="row">
                     <div class="col-lg-12">
-                        @livewire('admin.category.quick-category', ['category_id' => $post->category_id ?? null])
+                        <label for="categories">Categories</label>
+                        <div class="form-control">
+                            <select name="categories[]" id="categories" class="select2" multiple>
+                                @isset($categories)
+                                @foreach ($categories as $category)
+                                <option value="{{$category->id}}" {{isset($post->categories) ?
+                                    (in_array($category->id,$post->categories->pluck('id')->toArray()) ? 'selected' :
+                                    '') : ''}}>{{$category->name}}</option>
+                                @endforeach
+                                @endisset
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

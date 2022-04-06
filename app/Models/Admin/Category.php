@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Models\Admin\Post;
 use App\Models\Admin\Property;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Support\Facades\Cache;
@@ -70,14 +71,9 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id')->with('categories');
     }
 
-    public function properties()
+    public function posts()
     {
-        return $this->hasMany(Property::class);
-    }
-
-    public function allProperties()
-    {
-        return $this->hasMany(Property::class, 'main_category_id');
+        return $this->belongsToMany(Post::class);
     }
 
     // Scopes

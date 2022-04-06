@@ -26,10 +26,13 @@
                         <b>Priority :</b><span class="text-muted">{{$post->priority ?? 'N/A'}}</span>
                     </li>
                     <li class="list-group-item">
-                        <b>Category :</b><span class="text-muted">{{$post->category->name ?? 'N/A'}}</span>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Main Category :</b><span class="text-muted">{{$post->mainCategory->name ?? 'N/A'}}</span>
+                        <b>Categories :</b>
+                        <br>
+                        @isset($post->categories)
+                        @foreach ($post->categories as $category)
+                        <span class="badge badge-primary badge-air-primary">{{$category->name ?? "N/A"}}</span>
+                        @endforeach
+                        @endisset
                     </li>
                 </ul>
                 <hr>

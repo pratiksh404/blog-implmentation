@@ -22,12 +22,16 @@ class PostRepository implements PostRepositoryInterface
 
     // Post Create
     public function createPost()
-    { }
+    {
+        $categories = Cache::get('categories', Category::latest()->get());
+        return compact('categories');
+    }
 
     // Post Store
     public function storePost(PostRequest $request)
     {
         $post = Post::create($request->validated());
+        $this->attachCategories($post);
         $request->image ? $this->uploadImage($post) : '';
     }
 
@@ -40,19 +44,22 @@ class PostRepository implements PostRepositoryInterface
     // Post Edit
     public function editPost(Post $post)
     {
-        return compact('post');
+        $categories = Cache::get('categories', Category::latest()->get());
+        return compact('post', 'categories');
     }
 
     // Post Update
     public function updatePost(PostRequest $request, Post $post)
     {
         $request->image ? $this->uploadImage($post) : '';
+        $this->attachCategories($post);
     }
 
     // Post Destroy
     public function destroyPost(Post $post)
     {
         $post->image ? $post->hardDelete('image') : '';
+        isset($post->categories) ? $post->categories()->detach() : '';
         $post->delete();
     }
 
@@ -81,6 +88,18 @@ class PostRepository implements PostRepositoryInterface
                 ],
             ];
             $post->makeThumbnail('image', $thumbnails);
+        }
+    }
+
+    /* Attach Categories */
+    protected function attachCategories(Post $post)
+    {
+        request()->validate([
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
+        ]);
+        if (request()->has('categories')) {
+            $post->categories()->sync(request()->categories);
         }
     }
 }

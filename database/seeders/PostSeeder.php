@@ -21,7 +21,7 @@ class PostSeeder extends Seeder
         $faker = Faker::create();
         while ($i <= 20) {
             $category = Category::find(rand(1, 6));
-            Post::create([
+            $post = Post::create([
                 'code' => time() . $faker->unique()->numberBetween(100000, 999999),
                 'name' => $faker->sentence,
                 'slug' => $faker->slug,
@@ -39,6 +39,7 @@ class PostSeeder extends Seeder
                 'meta_description' => $faker->sentence,
                 'meta_keywords' => $faker->words(3, false),
             ]);
+            $post->categories()->attach([1, 2, 3, 4, 5, 6]);
             $i++;
         }
     }

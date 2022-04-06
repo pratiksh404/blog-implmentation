@@ -36,7 +36,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');
+        return view('admin.post.create', $this->postRepositoryInterface->createPost());
     }
 
     /**
