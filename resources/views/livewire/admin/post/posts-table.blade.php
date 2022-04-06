@@ -190,12 +190,12 @@
                                 }
                             });
         
-                            $('#interval').on('apply.daterangepicker', function(ev, picker) {
+                            $('#daterange').on('apply.daterangepicker', function(ev, picker) {
                                 let start_date = new Date($('#daterange').data('daterangepicker')
                                     .startDate.format('YYYY-MM-DD'));
                                 let end_date = new Date($('#daterange').data('daterangepicker').endDate
                                     .format('YYYY-MM-DD'));
-                                window.livewire.emit('date_range_filter', start_date, end_date)
+                                window.livewire.emit('date_range_filter', start_date, end_date);
                             });
         
                             $('#daterange').on('cancel.daterangepicker', function(ev, picker) {
