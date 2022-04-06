@@ -25,6 +25,12 @@
                     <li class="list-group-item">
                         <b>Priority :</b><span class="text-muted">{{$post->priority ?? 'N/A'}}</span>
                     </li>
+                    <li class="list-group-item">
+                        <b>Category :</b><span class="text-muted">{{$post->category->name ?? 'N/A'}}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Main Category :</b><span class="text-muted">{{$post->mainCategory->name ?? 'N/A'}}</span>
+                    </li>
                 </ul>
                 <hr>
                 @isset($post->image)

@@ -67,6 +67,16 @@
             </div>
         </div>
         <br>
+        <div class="card">
+            <div class="card-body shadow-lg">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @livewire('admin.category.quick-category', ['category_id' => $post->category_id ?? null])
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="card shadow-lg">
             <div class="card-body p-3">
                 <div class="card-body">
